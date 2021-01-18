@@ -136,6 +136,7 @@ textSprite.setIcon(img`
     . . . . . . . . . . . . . . . . 
     `)
 textSprite.setBorder(1, 3)
+textSprite.z = 1
 // wrap around code
 game.onUpdate(function () {
     if (mySprite.x < 0) {
@@ -148,5 +149,4 @@ game.onUpdateInterval(500, function () {
     projectile2 = sprites.createProjectileFromSide(enemyShips[randint(0, enemyShips.length - 1)], 0, randint(50, 100))
     projectile2.x = randint(10, 150)
     projectile2.setKind(SpriteKind.Enemy)
-    projectile2.z = -1
 })

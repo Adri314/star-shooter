@@ -116,7 +116,7 @@ info.setScore(0)
 info.setLife(3)
 EMP = 3
 textSprite = textsprite.create("x" + EMP, 1, 6)
-textSprite.setPosition(6, 20)
+textSprite.setPosition(75, 3)
 textSprite.setIcon(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . 6 6 6 6 . . . . . . 

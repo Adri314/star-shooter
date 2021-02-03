@@ -21,6 +21,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         `, mySprite, 0, -100)
     music.pewPew.play()
 })
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    game.over(false)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
     otherSprite.destroy(effects.fire, 200)
@@ -29,12 +32,13 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 200)
-    info.changeLifeBy(-1)
     music.playTone(131, music.beat(BeatFraction.Half))
+    statusbar.value += -1
     scene.cameraShake(4, 500)
 })
 let projectile2: Sprite = null
 let projectile: Sprite = null
+let statusbar: StatusBarSprite = null
 let textSprite: TextSprite = null
 let EMP = 0
 let mySprite: Sprite = null
@@ -113,7 +117,6 @@ let enemyShips = [img`
     . . . . . . . . . . . . . . . . 
     `]
 info.setScore(0)
-info.setLife(3)
 EMP = 3
 textSprite = textsprite.create("x" + EMP, 1, 6)
 textSprite.setPosition(75, 3)
@@ -137,6 +140,10 @@ textSprite.setIcon(img`
     `)
 textSprite.setBorder(1, 3)
 textSprite.z = 1
+statusbar = statusbars.create(40, 4, StatusBarKind.Health)
+statusbar.max = 3
+statusbar.setPosition(22, 4)
+statusbar.setBarBorder(1, 3)
 // wrap around code
 game.onUpdate(function () {
     if (mySprite.x < 0) {
